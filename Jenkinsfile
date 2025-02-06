@@ -3,7 +3,7 @@ pipeline {
     stages {      
         stage("Copy file to Docker server"){
             steps {
-                sh "rsync -avz --delete /var/lib/jenkins/workspace/66025009-Nextjs/ root@43.208.253.87:~/66025009-Nextjs"
+                sh "rsync -avz --delete /var/lib/jenkins/workspace/66025009-Nextjs/root@43.208.253.87:~/66025009-Nextjs"
             }
         }
         
