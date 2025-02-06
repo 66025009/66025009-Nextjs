@@ -32,7 +32,7 @@ export async function getChatsData() {
       profile: "/images/user/user-01.png",
       isActive: true,
       lastMessage: {
-        content: "See you tomorrow at the meeting!",
+        content: "See you tomorrow at the meeting! 66025009",
         type: "text",
         timestamp: "2024-12-19T14:30:00Z",
         isRead: false,
