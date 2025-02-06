@@ -11,7 +11,7 @@ pipeline {
             steps {
                 ansiblePlaybook(
                     playbook: '/var/lib/jenkins/workspace/66025009-Nextjs/playbooks/build.yaml',
-                    inventory: '43.208.253.87,',
+                    inventory: '43.208.253.87:4265,',
                     extras: '--ssh-extra-args="-o StrictHostKeyChecking=no"'
                 )
             }    
@@ -21,7 +21,7 @@ pipeline {
             steps {
                 ansiblePlaybook(
                     playbook: '/var/lib/jenkins/workspace/66025009-Nextjs/playbooks/deploy.yaml',
-                    inventory: '43.208.253.87,',
+                    inventory: '43.208.253.87:4265,',
                     extras: '--ssh-extra-args="-o StrictHostKeyChecking=no"'
                 )
             }    
