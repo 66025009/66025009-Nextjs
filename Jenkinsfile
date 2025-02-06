@@ -3,22 +3,27 @@ pipeline {
     stages {      
         stage("Copy file to Docker server"){
             steps {
-				//แก้ตรง team33-neogym ให้เป็นชื่อเดียวกับ pipeline job/item ที่สร้างใน jenkins
-                sh "scp -r /var/lib/jenkins/workspace/66025009-Nextjs/* root@43.208.253.87:~/66025009-Nextjs"
+                sh "rsync -avz --delete /var/lib/jenkins/workspace/66025009-Nextjs/ root@43.208.253.87:~/66025009-Nextjs"
             }
         }
         
         stage("Build Docker Image") {
             steps {
-                //path yaml files
-				ansiblePlaybook playbook: '/var/lib/jenkins/workspace/66025009-Nextjs/playbooks/build.yaml'
+                ansiblePlaybook(
+                    playbook: '/var/lib/jenkins/workspace/66025009-Nextjs/playbooks/build.yaml',
+                    inventory: '43.208.253.87,',
+                    extras: '--ssh-extra-args="-o StrictHostKeyChecking=no"'
+                )
             }    
         } 
         
         stage("Create Docker Container") {
             steps {
-                //path yaml files
-				ansiblePlaybook playbook: '/var/lib/jenkins/workspace/66025009-Nextjs/playbooks/deploy.yaml'
+                ansiblePlaybook(
+                    playbook: '/var/lib/jenkins/workspace/66025009-Nextjs/playbooks/deploy.yaml',
+                    inventory: '43.208.253.87,',
+                    extras: '--ssh-extra-args="-o StrictHostKeyChecking=no"'
+                )
             }    
         } 
     }
